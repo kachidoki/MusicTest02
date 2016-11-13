@@ -29,16 +29,16 @@ public class MusicService extends Service {
     }
 
     public static MediaPlayer mp = new MediaPlayer();
+
     public MusicService() {
         super();
-        Log.e("Test","-------Service构造--------");
         try {
             mp.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath()+"/1.mp3");
             mp.prepare();
             Log.e("Test","-------mediaIsPrepare-------");
             musicIndex = 1;
         } catch (Exception e) {
-            Log.d("hint","can't get to the song");
+            Log.d("Test","can't get to the song");
             e.printStackTrace();
         }
 
@@ -74,7 +74,7 @@ public class MusicService extends Service {
                 mp.seekTo(0);
                 mp.start();
             } catch (Exception e) {
-                Log.d("hint", "can't jump next music");
+                Log.d("Test", "can't jump next music");
                 e.printStackTrace();
             }
         }
@@ -90,7 +90,7 @@ public class MusicService extends Service {
                 mp.seekTo(0);
                 mp.start();
             } catch (Exception e) {
-                Log.d("hint", "can't jump pre music");
+                Log.d("Test", "can't jump pre music");
                 e.printStackTrace();
             }
         }
