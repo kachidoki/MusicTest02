@@ -19,7 +19,7 @@ public class MusicService extends Service {
             Environment.getExternalStorageDirectory().getAbsolutePath()+"/张国荣千千阙歌.mp3",
             Environment.getExternalStorageDirectory().getAbsolutePath()+"/1.mp3",
             };
-    private int musicIndex = 1;
+    private int musicIndex = 0;
 
     public final IBinder binder = new MyBinder();
     public class MyBinder extends Binder {
@@ -33,7 +33,7 @@ public class MusicService extends Service {
     public MusicService() {
         super();
         try {
-            mp.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath()+"/1.mp3");
+            mp.setDataSource("http://m2.music.126.net/AuxCK2R5aJlTETgi8kwN3g==/5923069139252948.mp3");
             mp.prepare();
             Log.e("Test","-------mediaIsPrepare-------");
             musicIndex = 1;
@@ -68,7 +68,11 @@ public class MusicService extends Service {
             mp.stop();
             try {
                 mp.reset();
-                mp.setDataSource(musicDir[musicIndex+1]);
+                if (musicIndex==0){
+                    mp.setDataSource(musicDir[musicIndex]);
+                }else{
+                    mp.setDataSource(musicDir[musicIndex+1]);
+                }
                 musicIndex++;
                 mp.prepare();
                 mp.seekTo(0);
